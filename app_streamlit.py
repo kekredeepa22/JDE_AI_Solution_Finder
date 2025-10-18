@@ -1,3 +1,4 @@
+import openai
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -116,4 +117,5 @@ if st.button("Find Resolution"):
 
 st.divider()
 st.caption("Built with ❤️ using OpenAI and Streamlit.")
+
 
