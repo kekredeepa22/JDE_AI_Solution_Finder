@@ -1,0 +1,290 @@
+Issue,Resolution
+Out of balance issue,make changes in open amount and gross amount in P0911 
+Balance do not match with Gross,Check open Amount and Gross Amount F0411 AP and AG. Else check F03B11 for AP and AG. Need SQL
+Batch in Use,Approve the Batch in P0011
+Expenses recorded against the Grant,Use the Below SQL
+Order Stuck at 620,"Check Duplicate Invoice in Customer Ledger, Missing AAI and DMAAI. Please check with Roger or XM, If order type is SA, then sold to should be CA, if order  type is SO than Sold to should not be CA, Account number posting edit code should be blank. If PBCO error than Processing option to be changed by XM, check if customer is INactive, check if IB line is updated in Item Branch, check if Lot is expired or Lot on Hold or Blank, missing Preference for GMMCU"
+Order Stuck at 590,"If Order Type is SX then Consolidation is not applied and use SA Order Type, For India orders Check P75I210 for both sold and ship To, If invoice is not done check table F49211, Find if order is on Hold, check Data selection"
+Order Stuck at 575,Shipment status below 30 it should be 30 or greater. Generate new Shipment by P4915 BXAP9998.
+Order Stuck at 578,"Check other lines in same shipment. System will wait for all lines to come at 578 and then go ahead. If order type is CO or any credit order, it is verified and moved manually by user."
+Order Stuck at 560,"Check iF on Hand Flag is 1. if it is 1 move the order status manually. Check shipment Status, it should be 25. if not 25 than move the Shipment status by P4915 BXGM9999. Check Item On hand Quantity. Check if Lot is expired or on Hold. Check if Order is on Hold. check if Order is future comitted."
+OK order not updated with SK order,Check the Acknowledgement in F47032. if not received raise Ticket to EMEA or UCAN
+OK order stuck at 370,Check if Acknowledgement received in F470371. Give APAC OK number and Find
+Order Stuck at 547,Check the EBOS…
+Order Stuck at 532,Check for the compliances P5900013.
+Incorrect Currency,check Override Currency rate in P5900090
+Routing Error,"If in Work with Shipmet , if Routing status is 1 or 9. then go to Routings from Row and select the one marked in Green Tick."
+Order Status error at Po Receipt,
+Item Availability is not matching ,"Check if open sales order for given Item, Lot and Location. Check open Suggestions in P4600 and check in P4717 in ware house Menu. Later Run the report R42995, R46995. If no open sales order found then run R59R0269"
+Invoice Reprint Menu,Order Management--Asia OM version -- Print Generate Invoices--Country Menu
+To reprint there is no data available in F47047,Run the report R42565 BXAPSG11R
+Item is Obsolete,Check Item Master P4101 for Stocking type.
+What is the peference for BP,Preference is PREFBP
+Menu path for ST OT orders,Menu Path Supply chain Support---Supply chain Support APAC- Enter ST OT Corrections
+WORK,Work with Transaction Details. Hardware Retriggering. Find the number . Click Select change the comments and save the data. It will be retriggered.
+INC000001115163  GSP Issues,SR Number will be there in P42101as Release number. Either Ship To address need to have EDI as Batch Processing defined in Customer Master or Item Branch Plant may not exist.. Pass the SR number in F47122 in reference field. F47122 Data with Flag as N. Also one possibility is that the UOM in the table F47122 may be wrong and not as per JDE item Master set up.
+GSP Issue,"If user ask to trigger the Account in Hardware. If we open the application of HW transaction application, then item and lot is attached to some ship to. This ship to is the Account. Fo to address book and customer Master and save the data. It will be retriggered."
+Reprint Invoice,KCAPSG15R  Singapore
+Reprint Consolidated Invoice,R55R0035_KCAPAU04 Run it based on Invoice Number
+Invoice Reprint,R55R0176 BXAPIN02 reprint Invoice CF output
+Invoice Reprint for AR Invoices found in P03B2002,R553B505_BXAPPH04 for RM invoices  same version can be used for Australia with change in company.
+Reprint Invoice,R42565|BXAPSG11R. If Records are not created in the F47047 table. Run this report and later we can run the Invoice report.
+,Shipment status will move to 25.
+P4072 ZJDE0002       P40162,Item Comments added in the Advance Preferences..Preference Name is GLPRTMSG.. Application number is P4072 ZJDE0002. Also get the Message code from P40162.
+R42565_BXAPKR07,Sales Orders is having the Promised delivery date of Tommorrow.
+,Please change the status to 520 586 status. The order will get processed.
+R59437001 BXAP8003,This report will Create the Purchase Order for SO/DS and OK/DS. If OK/Ds order is not getting created there may be chances that Item is defined as Obsolete. Or please check the Data selection..
+R59R0003 BXAPSW01 India,Order Compliance Checking  850 EDI. AIP Failure
+R55R0080,55/CB is the UDC. System will pass the first four digits if account and pass to UDC.
+,User is changing the branch plant and then splitting the order withoust saving the order. Need to save the order after changing Detail BP and the try to split the line.
+,"Check if the shipment is at 80. Check in ledger if it is by R4981. It means Freight Update is done. Status of 578 590 comes by Receipt of Purchase order. Check if related Purchase order is receipt, then we can change the status to 578 590."
+,Update the status to 586 from sales order detail..
+,"If the Line type is TS, then the status can be moved to 590if it is stucked at 578."
+,R59R0152 BXAPSG81 takes status to 590
+P46091,P46091 To update the container Code for Branch Plant.
+P46020 and P46011,"For Location Invalid Error please do the set up in Item Profile P46020, Item Location P41024, and  Bp conatants--Location Defination--W/h Control. Also Check P46011.                                                                                                                                                      2. Now check if the UDC D3 /XU is defined in the DC Link.                                                       3. also check UDC for D3N /S1 for cycle issues in DC Link."
+Item not showing in availability.,"If the item is Committed at any location and there is no open Sales Orde, then check the below.Go to F4611 and enter the Item Number, Business Unit, From Lot and From Location. Enter Status with name Sts as less then <398. Now Click Find. We should get one line..Now go to P594617 BXGM0004. Enter the Item Number and Branch Plant in header and Batch Number in Detail. Cross check the Quantity and Item. No select the line and click cacel from Row exit. Menu Path is Warehouse Management--ountry Menu--Manual Process--Pick Confirm Consolidated."
+R4981 BXAPSW06M,Add the Lines in the SK/DS and the shipment number will be generated. Make sure that the Item Price should be same as line above. Approve the shipment  bt P4915. Now change the status of the order to 562 to 575. Later run the Freight Update R4981 BXAPSW01. Do not forget to change the data selection to change the Shipment status to 30.   We need to change the Statuus of the order since there is no ASN involved.
+,"If SK /DS order is stuck at 571 and shipment status is stuck at 29, then run the report R47032. If order line is not at 571 then take the status back at 571 and then run the report."
+,Later run the Freight Update
+,EDI Advanced Shipping Notice Detail  Asn INBOUND  
+R59R47031 BXAP8013,EDI Advanced Shipping Notice Detail  Asn  INBOUND  OK/DS
+R01490/BXAP0001   ,"Processing Options for R01490/BXAP0001                                                                        Processing Options :   Enter a '1' to create a report.  --  1                                               Category Code 01  --  K41. . No other changes..                                                                  Data selection                                                                                                                                        IF   CostCenter (F0101)(MCU)[String]    ==    Literal:     4200MAIN                                                                                             .AND  AddressType1 (F0101)(AT1)[String]    IN    Literal: HP, HPD                                                                                                 AND  ReportCodeAddBook001 (F0101)(AC01)[String]    ==    Literal: K14                                                                                   AND  AddressNumber2nd (F0101)(AN82)[MATH_NUMERIC]    IN    Literal: 76042957, 76043157, 76042973, 76043028, 76042988, 76042992, "
+Tax rate Area Isue,P4008. To delete the Tax rate Area from detail first you need to blank out the field called Taxable and then blank out the Tax explanation Code and Tax rate Area and then click on the below line.
+,"User is having the issue that Item was showing extra Quantity on BI report but cardex was matching.; Resolution: Tis issue is there since Some lines of cardex did not went to AsOff Table. It happened since the some lines of sales order were changed manually to 980 999, thus PC Code was showing as S. this Ledger to Asoff Integrirt. Corrected via Assoff Correction P41112A."
+,Lot Value Mis match for CLM BP. Lot is on Hold for Some Other branch plant. Please delete the Hold Lot first for CLM branch Plant  and then for other Branch Plant.
+Set up for India Localisation,"Invoicing for India is not working and status not moving to next status. It is becayse of India Localisation Issue. Please do the set up in P75I304  and P75I001 BXAPIN01, P75I210,  F703030 for Localisation invoice. P7420565 application will give the  Document type that will be generated  from CC Doc type,once the  Invoice is run. This Application only has the Versions. Check table F703030 to check if document type is having the localisation entry or not. Please check P75I304 BXAPIN01 to get Excise Unit from BP. Also Please check ig Header Business Unit not MAIN BP. Since system picks the data from Header BP only"
+How to find the INI Number,P7420002   Localisation. Use this Application to understand If INI number is generated for Given Document Number. After the sales update is done the INI number would be available in F03B11 VR01 Field.
+INI number is not found in Customer Ledger,Check the userprofile for Sales Update. IN India Localisation should be updated.
+Purchase order cannot be received from Movement and Disposition,Check the ledger F43199. User would have changes the Unit of Measurement or the Cost would have changed when order was in Routing.
+Different types of RMA and there uses,"1R PO be Created,  2R both PO and Credit Order, 3R only Credir Order.  In case of Intercompany CI and O3 will be created."
+Tables for Advance Pricing,"Tables for Advance Pricing Key ID are F40941, F40942, F40943, F40721"
+RMA for GY orders,To reverse the GY OY orders created for Intercomapnay please create the RMA 2Y. Menu Path is Intercpmany Order Management--Intercompany Returns--Baxter Vantive Transactions--Credit Order for Material return RMA-Create RMA CRR Finished Goods. Make sure to to create RMA from History and enter the Branch plant in the header.
+RMA not working.. Purchase order is not getting created.,"If the purchase order is not getting created by P40051, then following  could be the mistakes. Try to add the branch plant on the screen and then click add button of P40051. Else if RMA is being created from History then there could be chances that there is nothing defined in P40052 for blank branch plant. there should be set up  for blank BP. if still some order is not getting created try to add the rma manually for same set , using same Item, Sold to and BP. check what is the issue. try to check the Hold codes for that branch plant in P42090."
+Opening Balance Record  Missing,If we are getting the issue then please try to check application P75I381. Excise set up. It comes when using INDIA localisation. This is just the dummy set up and has no effect .  India Localisation--Excise Duty--System Setup---Upload A2/C2/Pla Opening Balance. Get Excise unit fron P75I304.
+How to close the batch in Manufacturing,Batches are not moving from 10 to 99 status. We need to close the batches in P553150 APAU0001.  Manufacturing--Mfg Toongabbie---Planning AU--Production Schedule Workbench..
+Status error while receiving the OT orders,P43214 BXAP0002 and BXAPIN04 To reverse the OT Order without checking the related ST
+P46011/ P5900026,ETPD to APPD issue. Check UPM Conversion in P46011
+Unit of Measurement UO,Please do the set up in the Item Branch Category codes Item Dimension Group.
+Reason for Order going in back order,"If the order is going to back order even if the Quantity is available , then please check the days to expire. The Days to expire would be more. Else check if Qty is not available. "
+Shipment Number is not generated,"Check if order is in back Order, If Quantity is in Qty 1 or 2 Tab,if order is future comitted, check UDC 49/SD"
+" error as ""User Has no Authority"" ","While updating HWT update in my account am getting error as ""User Has no Authority"". Please check P5900065"
+,If the Localisation IN is activated it will not capture the adjustments that are defined based on Item Group. User creating the order should not have the IN Localisation.
+Sales Order Document Type is CC.,"The issue comes when the Invoice is run by user without activating the India Localisation. To correct it take the status backto 531 590 status and re run the Invoice by using the report. For S3 Order type use R42565_BXAPIN03, with change in data selection. It will generate Ri Doc type. After the sales update is done the INI number would be available in F03B11 VR01 Field"
+Currency,Need to run the report R04820A to change the currency.  Amount..
+Version for Receipt Order for Flex Accounting for Status Invalid.,P594312 BXAPSG01 Status Invalid while receiving the Order. P4312 BXAPIN03 for OK Orders with flex accounting
+Item is Restricted from EDI.,Item cannot be used in EDI. Item is Restricted from EDI. Please go to Item Branch Tag File Maintainence. We have the Flag as EDI Hold Flag. Go inside  item branch and click on Additional Codes.
+,ShipTo address will be printed in PO Print from the Purchase order Detail Line. Please check the Ship To address in the detail line. It might be different.
+Adjustment Schedule.,User cannot Edit the Adjustment Schedule. Need to remove the GMR01CMST1 role.
+Routing error. ,Explanation Field being Processed does not allow blank or zeros to be entered. Select the shipment and from FORM exit select Routing options.
+Credit Hold C1 in OK,"Sometime Ok order gets C1 hold. When removing the SK credit hld if the related Ok is open or in revision, the C1 hold for OK will not be removed. Please remove it by P43070 Zjde0001 by using password as C1. PD password will not work."
+Exchange Rate is not being Picked from P0015A.,Go To P590909 XBX0001. Enter Order Type and company and get the rate type. Now go to P1113 -- enter From and To Currency and enter the rate type. Go inside and we will get the Exchange rate.
+User not having the access to remove Credit Order Hold.,Security issue. Please check if user has the access for role GMD01HIEI1AB.
+4270 DMAAI,The system wwas asking to set 4270 dmmaai for the item GL class but different GL offset was mentioned in the P4071. The issue has came since for that adjustment override price field was kept as blank. If the if the override price or new base Price flag while defining adjustments in Schedule are kept as blank then system will treat them as tax adjustments and will ask for 4270 dmaai. Set the Override price f;ag is checked and the issue was not comming.
+,"For Non stock lines where the inventory Interface is N, then system will take the Gl Class from the line type constants. It will not pick the Gl Class from Item Master or Item Branch."
+ if No open sales Order,Please check if the order is future comitted. Then run the report R42995 BXAPAU02. 
+Repost Active sales Orders if no open sales orers,R59R0269 NBAP0001 if No open sales Order
+Repost Active sales Orders.. Commitments,Please check Warehousing. There are likely chances that sales order are in Pick Request. To correct the availabiliy  if not showing in available and showing only in On Hand
+Routing Error,Routing error is coming since Weight in UOM is different in Main BP and Transaction BP.
+SF Order Stuck at 562.,"Order was stuck at 562 and Ship confirm is not happening by schedular. Please check in the Application P47130. Enter order No. in Document number Field. When the report will run RR49500, it will insert the data in the table F47131/32. if the data is already there in this table then Ship confirm will not be done by schedular."
+SF Order not created. SF order stuck at 590,Check the Search type of the customer. It should not be HP.  The Unit Price has to be Blank. Also check if the Header and detail BU are same or different. Also check the Business Unit in the Address book and then enter it in the UDC 59/BX. This UDC will define that the ales order is created with which Business Unit
+Cannot process the files and folder in outbound folder for Payments,"User cannot see the EDI Invoices in the folder. It is SO Out bound in the folder by AIP. Please run the report R42565|BXAPSG12R and later check the EDI invoice in F47046/47 . Now change the Transaction set to 810 and Trading partner as HKEDI, both in header and detail. the report will run daily at 6.30 SGT by AIP and then user can see the RI numbers in the folder. this version will generate records in F47046/47. If the user facing the issue in processing the files for payment then there may be chances that field above the quantity in outbound file will not have the cross reference item Number. it will only be like this G25LIN0000001.. but it should be like G25LIN000000104250319800952. 04250319800952 is the cross reference itemhere in P4104. Make the changes manually in the file and ask user to process it."
+Ship Confirm not happening for SF orders.. P4205,Keep the order at 562 status and shipment status at 25
+When the R49500 will run it will create the record in F47132 and F47131. It could be possible that there is entry in F47132 but not In F47131. Please do manual Ship Confirm,Baxter Task View-- Warehouse Management--Japan TDC--Manual Process-- Manual Ship Confirm Recovery  P4915_BXAP0004
+Document type is CC and Doc number is generated..,Sales order is at 590 620 status but Document type is CC. It happens if the Invoice is done without IN Localisation. Please take the status back to 578 590 and then run Invoice bt R42565 BXAPIN03
+Purchase orders not created in Jde from RR Rapid Response,Enter the RR number in Reference 1 in F4311Z1 and get the Batch Number.. Try to run the report R58R43Z1I_BXAP0010. Check the details EDSP need to be Blank in both Header and Detail in P4311Z1.
+SF Orders and SR issues Resolution,Please check the SR Number in F47122. enter the SR number in Transaction Explanation. If the data is there in this table it means The INV Transfer is done. Now try to enter the same SR number in the reference 2 Field in F47011/12.  Check if the order is created in this table. Also the data need to be there in the table F5947011/12. enter the SR number in Refererence 2. to get the better results always enter the SR number in header table and use the EDI Document number to search it in Detail. EDI document number will be same in F47011/12 and F5947011/12. the SR number also will be same in all the tables including F47122.
+F47011 F47012 R47011 P47010 pre Processor,"BY running the pre Processor R59R0245, the data will be copied from F5947011 to F47011."
+,If the SK Order is Stuck check if line type is DS. If it is DS check the OK DS order in Reference Field. Now check SK/S order in reference colium in OK/DS. Bow check the ShipTo Field. The Ship to field should have the set up in Customer Master for LOB. Also check if the Lot is expired or not.
+Duplicate Free Good Line Created BY R47131. Taiwan Issue,"Sold and Ship To 70687212 ,,, BP 440001 ,, Order Type SO , Customer PO 10898999 ?? ,, Item: 955367, Quantity 48, Free Good Line created is 112467,  Adjustment Schedule is BAXAPTW ,, 3P,  04400, 860, TS Pur 04,, Trading Partner BXAPTW01  in P47130..  later run the report R47131. Do not enter the Lot and Location.. Let the report enter the Lot.Make sure that availability is there."
+Order stuck at 370. R47031 R59R47031,When order stuck at 370  then checking the F47032. Filter by HL code as I. The report is R59R47031. the version could be any of the one having 8000 series Put *800* and check one of the version with correct data selection. Check the SP code should be Y. Line number LNID should be correct.
+3-24349764951,SR for Oracle.. Duplicate free Good lines created by R47131
+Error of SOMBF Proces Pricing Failed,Unit Price is blank. Please check set up in Define Tax rules P5542017. (Pricing--India Pricing Set Up--Define Tax Rules). There may be some Adjustment that is a Mandatory set up but not defined or may be expired.
+Error of SOMBF Proces Pricing Failed,Also Check the Set Up In Intercompany Order Management-- Intercompany Set Up--Default Transaction Currency set UP
+Error of SOMBF Proces Pricing Failed,Even after all the set up in place use the Version P42101 BXGM0031. Unit Price may be showing as blank..Goinside order and click Pricing History and click OK.  Else go from Outside..Now blank out the Unit Price and extended price and click on below line
+Issue of Location Detail not Found in Warehouse,"Please run the report R46820 with BP, Item and Lot Details. Then we can cancel the suggestions."
+PO Reprint,Please use BXGM0031 version to reprint the order and check table F47016/17
+Freight Updtate Issue. R4981,R4981 BXAPTH11. This version is taking the sales order status from 620 to 999. it is moving the Shipment status to 80 but in processing options next status is not defined so it is taking from order activity rules. This option is not defined in any of the versions. so do not move the sales order status manully to 620 without running the freight update.
+P5998008 Third party Integration,P5998008 Application to get Order type and report version.. RR integration
+Pack Slip Issue Sucurity,3-25530818551
+GFS and GSP integration. Supplement data base. SFDC Boost System,Supplement Data base is I and data type is #H. user defined code is B means transfer to both the system.
+F594304 ,Location Lot status
+Unit Price for SK Order is not correct,Unit Price calculation for SK order ICCOSTRT.
+Menu Path for Default currency Set up,P5900089   > Baxter Task View > Intercompany Order Management > Intercompany Set-up > Default Transaction Currency Setup
+P41001,Exchange rate will not be picked from Order Header.. To get the exchange rate application is P1113. Baxter Task View--General Accounting--Multi Currency Processing--currency Restatement Rates.. Filter on AB.    To get the multiplere effect Application Number is P5900089 - please go to Intercompany Order Management--Intercopany Set up--Default transaction Currency set up.
+"No record in Hardware Transaction Details. P5900054  HWT.  F596111,  F596108, ","Check in Harware tracking--Daily Processing--Transaction Details.  Item should have HW flag in Item Tag file. Also check the Supplement data for #H. get the UKID from cardex and pass it in F596120. if the record exist then try to change the flag to blank and run the report R596120. if no record then run R59R0130|BXAP0001. get all the UKID for Item and Lot combination . Processing Options: Last Execution ID as N.. Update Data integrity as Y Exclude IB, IZ, IQ. Once u run please check in F596111."
+,"If records cannot be seen, then check if the Lot number is availble in HWT Lot Master with Z or given item code. If not available, please check if Item Cross reference is available P4104 with Cross ref type HT. Check the Document with name HWT Item Cross Reference."
+,Please run the report R59R0066 if in case all the records exist but latest records cannot be seen if we put Y
+Hardware Transactions,If Lot or hardware is showing in Vantive in place of Baxter than please check if latest transaction is with Blank operating status.
+Orders received in incorrect or wrong Branch plant.,"If the orders are received in wrong BP via EDI ASN , then probably the UDS 59/IF may be incorrect."
+ASN going in error  SQL,If the ASN is going in error. Please check the If the order Quantity is more tha n ordered.. Check if the other order in same EDOc is received.. Else it may be Lot Issue. Check the Country of origin in F594126. enter Item and Lot and EDOC number of F47032 in this table and get the ELLRP2. Now it should match with Lot Master Cat code LRP2. if the country of origin is not matching the EDI ASN will go in error. To corret this. we may change the Line number in P47030 Application. Get the exact line number from the PO detail. here the line number would be showing as 999.. but we have to change only for the line where the Lot number is mentioned.
+Wieght UOM is not correct in Sales Invoice.,"Is is due to UOM incorrectly defined as KG in place of GM. Change it to GM and need to run the report R46820 BXAPSW01 to refresh the table F4602. Run report with Item number , MCU and Lot Number. In processing option enter 1."
+R5542566_BXAPTM01,Thailand Manufacturing Invoice Issue . 21000077  RI  DOC in F47047. Company 04454
+R59R0176,"Item Price Replication. When item Price is added for MAIN BP and entry goes in F4106 then it will trigger F594106W. Now when we run the report R59R0176, it will copy the price from MAIN BP to all other Branch plants mentioned in UDC 59/BR. Make sure that we should have the Item Branch relationship."
+Work Order  JDE EBR Interface. Work Order Work file,No Data in the table F554805W .  Please run the report R55R4801_BXAPSW98. It is a schedular report. Add the data selection for Work Order Number.
+BSM Integration,"F590407W  BSM Integration. Please use the second Address number field to enter the data. If the data is having SP field as E , please aske team to Retrigger the data."
+Record Invalid while creating S8 order with Customer 70475826 and item Z5C8346C.,preference  GLEMCU is defined in system for Customer 70475826 but in details there is no Revenue business defined. All fields are blank
+R59R0245   P5900132,preference  GLEMCU is defined in system for Customer 70475826 but in details there is no Revenue business defined. All fields are blank
+"Sales order cannot be seen in JDE from Boost , SFDC",No schedular R59R0245_BXAP0030. Check the SR number in reference 2 colum. Check if the Doc type is RN. For RN doc type in F5947011 there is no schedular.. Please run the pre processor report R59R0245_BXAP0030.
+"Check with Bhise, Ashvini <ashvini_bhise@baxter.com>Mishra, Subrata <subrata_mishra@baxter.com>; NARAYANA M, LAKSHMI <lakshmi_narayana_m@baxter.com>; GLBL.CORP.GCEDEVOPS <GLBL.CORP.GCEDEVOPS@baxter.com>",Try to retrigger Assets from Hardware sytem by giving * as country code and Y in latest records.. Go inside and Click OK. Try to check the tables F5900173 and F596110 . Also check the item is Lot controlled and Supplement data for #H is Defined as Transfer to both systems. Also check the Item is defined as HT Hardware tracking in Tag File.  Also check that Ship To address is defined with Country Code in case of Asset Master. Also check in Hardware tracking application if Order Company and Document company set up is in place.
+MRP Price,P5542016
+Changing MOT and Carrier number for Given Shipments,
+R59R0197,This report will Runs thrice on Schedular and will inserts the data in Item Price table if there is no line in Item Price with Pricing UOM
+TAX Rate and Vat Print,THOVAT7  + V   is the combination to print the VAT in the sales order
+Lot Dates incorrect,System giving the error for lot dates. Lot Dates Incorrect.
+ICINTP is the adjustment Schedule for SK orders India,Order Number 6272 SK 04100
+State Code in the SFDC is incorrect as 14E and not 23,There is a traslation logic in SF . 23 will be translated to 14E . Please check the Pick list values.
+Item Price is not coming in sales order detail,Intercompany Order Management--Intercompany setup--Default Transaction Currency set up.system will pick the Percent and also will pick the Exchange rate from P1113 for rate type AB Budget. For example get 130 percent of cost defined in P4105 and then divide by exchange rate.
+Amount currency code cannot be changed.,User wanted to change the currency in Supplier Master. Please run the report R04820A BXGM0001. Please change the processing options . Date options put one year range and put 1 in both options in processing tab. And Curency in Currency tab.
+P59MD018,To get the X7 level for any item 
+,Get paid Application
+P5900181 / P5900182,P5900181. Run the records in Proof  mode using XBX0001. Using other version may not update the processed flag to P. Later run the report R59R0342 BXAP0002. Running this report from application in Final mode may end the transaction in error. Please ask Narendra or Nithya to run report.
+OT order stuck at 370 for SWL singapore Woodland,Please run R59R47031_BXAPSW01
+Blank Records filter on data Browser,Please Use <-1 to filter values for Blank records. Also we can use <) to filter blank records
+P4310 BXGM0004,Baxter Task View-- Supply chain Enquiries-- Purchasing/AP Inquiries--Purchase order Enquiry
+Order Credit Hold,Order Hold Information P42090. Allowable percent is 0.5 percent and perid is 2. It means user is allowed to have the amount of 2 percnt of total open amount  in 0 to 30 period. If open AR amount is 1lak then in period 2 amount cannot be greater then 2000 in 0 to 30 bucket.  Lets say if Order is invoiced on 1 Sept and Allowed days as per Payment terms is 15 days. No today it is 1 Oct. credit past days is 15 days. So the amount on sales order is updated in 0 to 30 days.
+P47011 BXAP0002 and P4210 BXAP0003,conversion of SZ  Pharmacy orders to SO 
+Favorites Folder is disappeared,Click on open Applications and go on pressing Tab on recent report and click enter. There we can see favorites and click enter over it.
+,Also in the personolization preferences there is a option for Reset Device SpecificEnterpriseOne Pages. Please click over it. It will start showing again
+Spot Award,https://worksites.baxter.com/sites/BaxIDC/SitePages/eFormRewards.aspx
+P5900007,Manufacturer name in QTS Item Supplier.  Anju Shear Sateesh Yelisetti…
+SOMBF Process Pricing Failed., Define Tax rules for India. P5542017
+Default Currency error is coming while creating the RMA,the original sales order is created with incorrect currency as per override currency rule. Delete the currency override rule and create RMA and there create the the set up. Just by expiring the  set up may not work someties.
+Gate Entry Table,F554311D
+Table  to check the DD items,F98711
+ERROR - dbms_stats is not called for gathering stats after inserts/deletes,"exec dbms_stats.gather_table_stats(user, 'F03B13')"
+Cannot get the data in Gate entry when clicking button inport PO,check the order status . It should be 282 370 or 280 400
+QTS Supplier. Supplier Name number and Manufacturer name not Printed,Purchasing --GSQTS Validation Set up
+"In General Ledger, the Batch G means it is AR By pass. IB means it is for Invoices",
+Wealth Holdings,House on rent
+Order Stuck at 591 for India,For India Finance need to push the order from 591 to 620. Use the menu Account Reecivable--Customer and Invoice Entry 4101--Customer Invoice Print---Update Status to 620 for non Inter company Invoice
+Order Stuck at 591 for ANZ,For ANZ if order stuck at 591 then Customer is defined as EDI order and also defined in Consolidated Invices. Check with ANZ MDM or Kerry for the set up.
+Ship To Address Invalid,"Update Freight code and Mode of transport in sales order Header  if user is getting the error of ship To Address Invalid, Please check with Pankaj Patel"
+Manifacturing. Work Order status P594892A,Update of Work order status WO. Go to Manufacturing--Manufacturing Set Up--Work Order ststus change Security
+Cardex to Item Location Integrity,R57R0110 Integrity report for integrity in F4111 and F41021
+R59R0982 report is blank,Use the DAS report  GL Transaction Report (R59R0982) V59081J1
+GSQ QTS Set up P590007 P590004,"in P590004 we set up a cross reference for JDE Supplier and GSQ Supplier. If theorder type for eg ON is set up in UDC 59/ST then system will not validate the GSQ Set up. Also if the item Additional Cat codes tab2 is not having blank, system will not check GSQ."
+Price Adjustment Line,R42565 BXAPTW09  to do invoice for the order lines having SO08 as 3. Price Adjustment Line
+GL Class issue having 9999 as Obsolete,The X2-X level field in Additional codes in Item Branch plant level will decide the GL Class. If X2-X level is  AA95 the Gl Class will be 9999. It should not be AA95
+Lot Retest date,Please check the On Hand date and retest date in Lot Master.  Quality--Quality Transaction and Enquiries--Lot Master Revision Ahmedabad. From This set up Lot retest date will be populated.
+"Check with Murlikrishnan Ganesan, Mahesh Chinnivari","F5531000, F5531001, F5531002, F5531003 outbound Table, F5531005  P5531000 Outbound files for 3WS Global Escape. It is Work Order Outbound. If the Work order is at 44 check the data in this table. If there is no data it means it processed and if the data is found in this table than there are likely chances that data is not processed from JDE to 3WS."
+3WS Issue,Now from here the data is processed from global Escape to 3WS.  Later the same data will come back Inbound to JDE. This time please check In table F5531005 by work order Number.  Once the data comes back to JDE the Work order will move to 85
+GUI cannot be generated and Print for DQ order,Amount is credit thats why unable to generate the GUI . Amount has to be Debit only
+SQL to Find the latest records in Hardware Tracking,"select HKN001 from apdta.F596111, apdta.F596108 where HIY59GIT = HKY59GIT and HILOTN = HKLOTN and HKY59SIT = '2M91617' and HKLOTN = '20100057DL' and HKCTR in ('AU','NZ')and HKN001 = HIN002)"
+Creating Presentations,https://wepik.com/ai-presentations
+Create Item Supplier Relationship,R59R0147
+Resume Creation,Land your dream job with HiCounselor
+Home care.. Patient management,P5900177 Home care--Home care AU--Orders--Au-esolutions Review. Enyer the Patient number or Interface reference number as Vr01 received from AIP.
+,"Now check if the order is in error from Processed flag. Now fo to table F590115 Hand Held orders Staging file, Enter the document numver and get the User reference number. check in the document for the reason of this issue using this User reference number."
+,check the data updated in table F590115 and inventory capture date in P5900177 both should be same
+,"Table or View does not Exist while Running SQL Go Any where. Add exec dbms_stats.gather_table_stats(user, 'F4102_ADT')   in the Update Query"
+Finding Halb code,Check in F3002 . Enter 55* in LITM and AIN *in the KITL field and F in the FORQ Fixed or Variable Field 
+Repost Orders Purchase sales and Work Order,"R3190  Repost Work Order, R42995 Repost Sales Order, R43990 Repst Purchase orders"
+,If Purchase order is not created from F4311Z1. if u want to check in F01131M then enter the Template ID as 043Z and template Value as *04050|R|*
+R47500 will call R42500 for Ship Confirm,
+Mettular Weighment System,Please check the report R55R0348. If there is any out put or it s in error. We can cross check the details by giving them the Batch No in the lot number in P48013. In the shared folder we have the folder for Successful and errors. If it is in error check the weight in header and it should match with the the details.
+P4205 Ship Confirmation,To do Batch Ship Confirmation Please use R47500. It will call the R4205 Internally
+P00092_BXAP0002,"Supplement Data Type IB and Data Type LT Lot master. If we  give the lot number an item Number the Manufacturing date will be updated here. If there is no data found here, then Manufacturing date would be the Receipt date."
+F49211 Sales Order Tag File,Cycle Billing check if data is here is Consolidated Invoicing is used
+TDS Voucher Match Issue,Get the Document number used for Voucher match and enter it in F0411. Pay Line in F0411 is mismatch when you find the document in P0411 nd click to Reguonal Info.
+P0411S,Speed Status Change For P0411 Details. Same can be used to Split the amount
+APAC All Documents,APAC JDE E1 - All Documents (baxter.com)
+Item Branch Duplication,R5941826
+Co orders stuck at 590,Please check if the Order is having the Zone number updated as IEP. Please run the report R42565 BXAPIN04. Do not forget to put IN in India Localisation.
+Cannot do Ship Confirm for Scrap Acetone,P41081  Please check Allowed Lot Status Group. For Acetone we have Allowed to do ales update for Lot that are at Lot status 3
+SO TS,Oders with line type TS that are stuck at 578. If in order there is only one line with TS line type than Financial charge process R59R0152 may not process it. Move it to 590 by speed status
+P59423  P590020 DCLINK,Application to give access for DC Link
+Cycle count Is not updated in Cardex,Cycle count is done but there is no effect in cardex since for the item the Lot Process type is 3 atht is lot is mandatoru but cycle is done with blank lot.
+**3452,No Instruction Table found. Please check the Cat Code for Item Branch.
+**3452,Baxter Task View-- Ware House Management--AUQLD WQ01--Manual Process-- Work with Waves--
+P594602,Baxter Task View-- Ware House Management--AUQLD WQ01--Warehouse Work Bench.. Find the wave --go inside and select the radio button and save it
+R09110Z _BXAP8002/BXAP8003,To copy the data from F0911z1 to F0911. if it is in error please check Account ID in F0911
+Branch plant for trigger to Boost and SFDC,"('2000MAIN','4451MAIN','2007MAIN','4453MAIN','3501MAIN','3520MAIN','4006MAIN','4050MAIN','4100MAIN','4200MAIN','4255MAIN','4360MAIN','4400MAIN','4258MAIN','4301MAIN','7751MAIN','3506MAIN','7740MAIN','7735MAIN')"
+Sales Acknowledgement POR failed,The post Processor job R59R0051_BXAP0008  will copy the Order Number to F5947011. AIP will check the order number in this table and verify it with F47046/47 and then send Achmowledgement to Intercompany EMEA. In our case the Post processor job took more time and did not update the Order Number In 47046 and F47047. Hence Acknowledgement report POR is getting failed.
+Cancel the Bulk Request,"to cancel the bulk request. First go to P4600, select line click on row Bulk Pick Request.Then click on Form and click remove consolidation. Same has to be done in the P594617 as well. First do it in P594617 and then in the Pick Request"
+Location Detail Not Found,Location Detail not found.. Please run the report R46995. please run with Branch plant and Number WareHouse TaskF4611 PTSK.. Run on Branch plant and Tak number.
+SZ Orders with INV Adjustment,Issue raised by shelley Piper.  SZ  orders are going to ERROR. Orders are not created. The Reason is that the INV Adjustment is not successful. If you check the Table R47121 and F47122. Check  if the Lot is on Hold. Check if Item Number Exist.. R47121 BXAP0002  will create INV Trabnsactions. R47011 BXAP0001 will create SO orders.
+UDC Creation,https://baxch-bxhsa-prod1-internal.pegacloud.net/prweb/PRAuth/app/DefaultPortalGlobal_/UY7fOtaWV2dIYhcMSAHY1g*/!STANDARD?pyActivity=Data-Portal.ShowDesktop&pzHarnessID=HID041CCE708E83E46EBBEA0F6FD28F25BA
+UDC Creation  59M RC,UDC EBD SYSTEM Electronic Batch Document Application 59M/RC
+Orders stuck at 591,If order is stuck at 591 the the report R42565 BXAPAU04 will take it ahead. it is because the Sold To /Ship To is marked as EDI in Cat codes of Custoomer Master. Mostly system will check EDI for Ship To in Customer Master Cat Codes. If on running it is giving no data selected check table F49211. Give the order Number and get the scheduled Pick date. If the data is there it means it is coming from Consolidated Invoice set up.. the set up is in P554223. Also please check the Customer Sets P42430. System will check the Forwarded to in custoimer set and pass it on in the P554223 in related to Customer field. Order status should not be 591 if the Customer is found on this application. Order Management--Order to Cash Set up--Consolidated Invoice Set UP
+schema for APAC,Data Base JDE9AP  Schema APDTA
+Sales Update,R42800 BXAP0097
+,If the Search Type is CA for Sold To then Order type cannot be SO.. It is for internal Purpose onle.. Order type should be SA.
+,Check if the Revenue Business Unit is not blank or incorrect.
+GTN Issue or Goods Transfer Note Issue,"For Goods Transfer Note issue of India, Please check P4600 and give the request number from PDF header  in the batch number field of F4600. Check ig the from alocation and To Loaction is correct or not."
+Phrmacy orders or Merlin Interface,"For Pharmacy orders the inventory is created by report R47121_BXAP0002  
+EDI Activity to Transfer Inventory. It has the transaction set of 852.EDI  Document type is SZ and Document type  DCTO is I3 . In F47011/12 the translation format EDFT is PHORDER , Transaction Set EDST is 850, EDI DOC type EDST is SZ"
+PHE Pacific Commerce,"Data is coming from PHE to JDE and uploded in F47011/12. Translation Set EDST is ORDERS , Translation Format EDFT is R850E00C, Document Type is SZ  Also Order Type is SZ. Try checking the Customer PO given by PHE team in Reference 1. Check EDOC 28189546 as a Reference."
+Trade connect,From Trade connect the data comes up in F5947011 from AIP. R59R0245|BXAPIN01 will run and data will flow to F47011 and then Again the report R47011|BXAPIN01 will update the F4201 and F4211. Check the Trade connect number in Ref 2. Please check EDOC 387562 as reference.. EDOC type is CF
+ Sales order not created by R47011,"If the order is not getting created by R47011,, check the status in F47012.. It should not 522 , it means the Order Qty is not in the multiple of Shipping UOM.  Please check R47911 BXAP8008T. Also check if the Line type created is ER. That is error line type."
+Data not going in EBD  Electronic Batch Distribution .. ,Please check the Supplemental data base for the Item in @2.. In this we need to add the Line for 07.. Check for the item CCCITBUFEX for @2
+ASN Post Processer,R59R0153
+,AGB Interface   Jde to Saitech. AFV interface. Check if any exceptions on AIP side
+Error Line Type ER,ER Line type. Please check if there is Availability. If the UOM is correct.. If the Item Branch plant exist.. If the Stocling type is not Obsolete
+In correct Location,Order is created with Incorrect Location that was not entered bu user.  Go to BP  constants- Location Defination-- Ware House control-- Receiving Location
+Purchase order lines are not visible.,Purchase orders are created but lines are not visible. Check the processing option Of P4310 Self service Tab. If it is activated then it can be viewed by Supplier as well.
+How to close the waves. Remove Wave Number from Workbench..,Please check the Wave in P594602. select and Go inside and click the option of Wave Open and Save it. After that please check the same in p5946013  bxap0002
+Pan Number and GST GSTN number,It is defined in Whos Who. Check type code as and GSTN
+Home care  DAR number. R55R0034  KCAPNZ02 report is blank,P5900019 enter the order Number-Get the DAR number in the Order History Details. In order to calculate the DAR number first check the CLIni Care of application P5900100.  Enter the CCO number in the Clinic care of and check for both Primary contact and all Contacts.. Go inside check the RX Flag /DAR field. It should be N or Y. should not be N/A.
+Manifest   external transport software tool (Transvirtual),"P5504215   check by keeping the date blank. Click All Transactions and Summary Lines. Connote Number is Shipment Number. When report R55R0044 will run the data can be seen in the table F5504215. In AIP the Interface name is Carrier Manifest p2P Interface_856CME1R.  Source ID is P5504215. Give both MNSHPN  Shipment number and MNUKID numbers to AIP to check. If the data is processed from AIP but not found in Transvirtual, please check with PACCOM Team. Data will be send from AIP to PHE. PACCOM will convert the raw data to the format required by Transvirtual. Please send email to the team PACCOM - Support <Support@pacificcommerce.com.au>; isuru.hettigoda@pacificcommerce.com.au"
+DAR report not  generating for Whakatane CCO No 69617238,Please check the AC26 in customer master Cat codes. It should ne NA. It could ue Y or N. Y means calculate Price and N is do not calculate Price. Dar field is also available when Order calcuation History.  From the Clinic care of Information go to Order calculation History from Form Menu. Find by patient or Order and Order History details at the bottom. Dar field is available. It picks from Customer Master only.
+,If the order is OK/D then it is Travelling Patient drop Ship orders. No Related sales order would be created.Related order type in such cases will be SX or SU
+Mercury Invoices,Mercury team may give some Delivery Note. In the delivery note Customer Order Reference is mentioned in detail section in last coloum something like P317977. Enter this number in F47011 in Reference 1 and get the order Number. Else try to give this number in Customer PO in sales Order Screen. This order will be processed in system till 620 and the invoice will be send to the user over the email. Please check for the order 65289553 XU. If order is stuck in 547 there may be chance that system we are getting the error Repricing logic is not applied at least one selected order line. Order status is not updated. In this situation please check the pricing in the adjustment ANZMGDRG with item combination. Pricing would have Expired..
+,
+Mercury Issue,Item Availability need to generated  in the table F47121/22. We may check via P47120.  Please check if all the lines required are there in the Document number. Else insert the data by R47121_BXAP0002. If Access is not there please apply the Role GMR09FGLC1. VR01 of F47122 is samas VR02 of F47012.
+,
+CF Create Form Issues,LPD Line Printer Deamon and Spooler server need to restart.
+PO Print not received by the Supplier,The Whos who for Supplier be defined as Attention Name in Type Code. Please check 62257258. Alsi in Supplier master Send method should be 3 in EDI information.
+Invoice Consolidation Set up  P554223,Baxter Task View--Order Management-- Order to cash set up
+DHL  EBOS,"Outbound tables for Purchase order is F5547016 and F5547017 . Once the data is there in these tables based on Purchase  Order Numbers, please check Routing Application. It should be in T3PL status and Container Id should be Populated. Container ID is the EDOC number for 3PL.  William need to check with 3PL and get the error screen shot. In most cases the Item Number is not available in 3 PL. Get it retriggered and then move the order in routing  from T3PL back to TRAN. wait for 10 min for schedular to retrigger the job"
+DHL EBOS,Check with Nani baby  or Minali Kathal from AIP.. It may happen that data is not going from AIP to PACCOM. From Paccom lease check with  PACCOM - Support <support@pacificcommerce.com.au> and harpreet.singh@pacificcommerce.com.au. Also could contact on +61 2 9468 3333
+DHL Item Number retrigger,"To retrigger the item Master please run R55R0374 BXAPAU04  KCAPAU04. it will get the data from Item Masete and F4104 and updates the table F554110T.   AIP Reads the data where EDSP = Blank and sends to DHL. After the report is run, please wait for 15 min for SP flag to change to Y."
+DHL  EBOS,"For Cycle count the data will be inserted to F47122 table by EBOS. From here the report R55R0360 will pick the data and do the Inv Adjustment. Some times the Lines in F47122 will be in error, since lot in F47122 may not be available in JDE. Please check EBOS to send proof of document if the Lot is correct. if it is correct and not exist in jde please ask QA team John to create the Lot. Also check if expiry date is correct. it should be same in CLM and regional Branch Plant. when the Inv adjustment will happen the EDOC document number from F47122. Please check the cardex if the Inv adjestment is done before we run the Report or make changes in the SP flag of F47122. and Document number from Cardex will be same."
+,
+,
+ASN Issue  for DHL and EBOS,"P47030, F47031 F47032"
+,"Select ELEDOC, ELLOTN, ELLITM, ELLRP2, IOLOTN, IOLRP2, IOMCU from APDTA.F594126, APDTA.F4108  where ELLOTN= IOLOTN and ELLITM = IOLITM and"
+,ELLOTN = '231124B' and ElLITM = 'SC6023'  and ((trim(IOMCU) = '3506WN03') or(trim(IOMCU) = 'CLM')) and ELEDOC = 1115344 ;
+Order Cancelled by R47131,If the order is cancelled than please check F55373H1. Please give the Original Shipment number and check the  DF Flag . It would be Y. it means EBOS has asked it to be cancelled or Deleted.
+EBOS DHL 3PL Branch Plants,EBOS: 3501WN02 3501WN04 3506WN04
+,DHL: 3501WW01 3506WW01
+,
+Kt Session link for APAC,https://spsites.aws.baxter.com/sites/ap_aro/APAC%20ARO%20Knowledge%20Library/Forms/AllItems.aspx?RootFolder=%2Fsites%2Fap%5Faro%2FAPAC%20ARO%20Knowledge%20Library%2FKT%20Recordings&FolderCTID=0x012000F9FC9F938B57184BA051C050F05F56E4&View=%7B34C8B618%2DD225%2D4EB6%2D90B8%2DE585CC45B85D%7D
+,
+Days to expire,Please go to P4072 ZJDE0002 and find for APGRADE . Please add for Item and customer Group. Country is AU ans NZ for Baxter and 7AU and 7NZ for Vanative
+If Qty changed at Receipt. Quantity Issue at Receipt.,P4216 to Check the SSCC number and Qty. It may come since there is Difference in the Shipping UOM and Transaction UOM.
+F594105A  P4105 F4105,Item Cost History  Archeive
+,UCC code or UPC Code is found in Storage/Shipping Row Exit from Item Master. If P4216 is ran then only this information will be retrieved from Storage an d Shoipping  to F470371 when running the  ASN report R47032.
+OMW Fat Client,P98220W te remove the objects from the Fat Cleint
+Subledger error,"Subledger error. This issue comes if the BU defined for Subledger in address book is not having acces to the user.. Mostly the search type should be EX.. Some time if Search type is PJ it means it is being used for Grant. Also the Address book BU should always be 4999MAIN, since all APAC users have access to 4999MAIN"
+Intercompany Orders set Up,If Vantive PO to Baxter Supplier = OY
+,if Vantive PO to Vantive Supplier = OK
+,if Baxter PO to Baxter Supplier = OK
+,If Baxter PO to Vantive Supplier = OY
+RMA Issues,R400502 BXAPAU02  . Please check if the Related Order is received in same Branch plant or if the Quantity is mismatch between SK and Related OK Order.
+RMA Issues,"Order S7, S8, S3 : These orders do not have sales to Customer and no AR. So Create RMA 1R.  It will Bring Inventory.  Manage Material Returm RMA -- Create RMA CRR."
+,To reverse SO order use RMA 2R. It will create both OM order and CO order..  Manage Credit for Material Returm RMA
+Credit Hold C1 Hold,If orders are getting removed from C1 hold then it may be done by Schedular R59R0589. The Release code would be AR that is Auto Release.
+Update the Scheduled Invoice Date,Please Use P42040 BXAP9999 to update the Invoice Date and then use R42565 KCAPAU06 to do invoicing
+,
+,
+620 stuck order corrections,Adjustment Branch plant Document No
+,I3+ 3520GSP2 26299147     I3 AU_GSP_NZ_BP_CORRECTION
+, 
+,IA- 3520GSP2 201070     IA AU_GSP_NZ_BP_CORRECTION
+, 
+, 
+,IA+ 3501GSP2 55833      IA AU_GSP_NZ_BP_CORRECTION
+, 
+,I3- 3501GSP2 26299190    I3 AU_GSP_NZ_BP_CORRECTION
+,
+APAC Business Hierarchies,Baxter Task View--Master Data--Item Master/Item Branch-APAC Reporting Hierarchy.  Check for Sales State STR
+4232 Dmaai error,If order is stuck at 580 due to R49700  for cycle billing. It may give the DMAAI error since the GL class code for the dmaai 4232 would be picked from Customer master and not from the Item Branch.Check for the stup from Customer Master.
+Order stuck at 590 591. Consolidated Invoices,Consolidation is driven by Ship TO. If consolidatied Invoices used to do Invoice at EOM then Ship To Cat code should be blank.Entry should be there in F48211 at Scheduled date should be there.Also set up should be available in P554223.Order status should be at 590.Order status should not be 591.SX order is not in consolidation.If order is stuck at 580 due to R49700  for cycle billing. It may give the DMAAI error since the GL class code for the dmaai 4232 would be picked from Customer master and not from the Item Branch. Check for the stup from Customer Master.
+SQL Access Database,JDE SQL Access Data Base:    global\sp-ora-349422-PROD-JDE9AP-Read
+ASN Issue P5847200_ ZBX0001,Kidney Co Task View--Warehouse Management--AU NSW WN04-EDI Interface - EBOS--PO Outbound and Receipt Inbound
+BAM Issue from Rishita Das,To check X7 and X2 levels. Please go to P59MD018. enter the Item Number
+Invoices are not available in Therefore there fore,"Check the report 5542566 BXAPAU02, BXAPAU21. these will run and data is transferred to Global Escape from Create form Server. It would be stored in C dive. Global escape will transfer them from C Drive to Therefore"
+What is therfore,"It is technology to save the PDF. It is a software to save the documents and manage them. It would save all the Invoices, PO Prints and Pick Slips. It would save it for 6 months."
+What is Globalscape,it is software company to Manage the file transfer from one system to other systems.
+What is Datastage,"Data Stage is a Data integration tool to integrate large volume of data. If the data is being transferred from JDE to SFDC at fixed time in a day, then it is done via Data Stage. If it is done in real time then it would be Table Trigger."
