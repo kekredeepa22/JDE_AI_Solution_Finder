@@ -14,8 +14,8 @@ ISSUE_COLUMN = "Issue"
 SOLUTION_COLUMN = "Resolution"
 EMBED_MODEL = "text-embedding-3-small"
 CHAT_MODEL = "gpt-4o-mini"
-
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+openai.api_key = st.secrets["general"]["openai_api_key"]
+client = OpenAI(api_key=openai.api_key)
 
 # --- 2. Streamlit UI ---
 st.set_page_config(page_title="JDE AI Solution Finder", layout="wide")
@@ -116,3 +116,4 @@ if st.button("Find Resolution"):
 
 st.divider()
 st.caption("Built with ❤️ using OpenAI and Streamlit.")
+
